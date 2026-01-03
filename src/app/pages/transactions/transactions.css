@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  height: 100vh;
+}
+
+.transactions-layout {
+  display: flex;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #2d3748;
+  border-radius: 10px;
+}

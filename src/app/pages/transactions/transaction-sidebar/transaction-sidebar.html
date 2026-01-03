@@ -1,0 +1,25 @@
+<aside class="sidebar-container h-full w-64 border-r border-gray-800 p-6 flex flex-col gap-8 bg-[#0b0e11]">
+  <section>
+    <h3 class="section-title text-xs font-semibold text-gray-500 uppercase mb-4">Saved Views</h3>
+    <div class="view-item active">
+       <span class="icon">📅</span>
+       <span>Current Month</span>
+    </div>
+    <div class="view-item">
+       <span>Last Month</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="section-title text-xs font-semibold text-gray-500 uppercase">Category</h3>
+      <span class="text-gray-400 text-xs cursor-pointer">Select All</span>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <span *ngFor="let cat of categories" 
+            class="badge bg-[#2d2159] text-[#b794f4] text-[10px] px-2 py-1 rounded-md border border-[#44337a] cursor-pointer hover:bg-[#3b2d70]">
+        {{ cat }}
+      </span>
+    </div>
+  </section>
+</aside>
