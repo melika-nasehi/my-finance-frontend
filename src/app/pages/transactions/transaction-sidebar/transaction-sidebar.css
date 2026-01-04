@@ -4,16 +4,25 @@
 }
 
 .sidebar-root {
-  background-color: #0b0e11;
+  background-color: #1c1b22;
   height: 100vh;
-  padding: 24px 12px;
-  overflow-y: auto;
+  width: 350px; 
+  padding: 24px 16px;
+  overflow-y: scroll; 
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+  border: 1px solid rgb(39, 39, 42); /* اضافه شدن بوردر به کل سایدبار */
+}
+
+/* مخفی کردن اسکرول‌بار در کروم و سافاری */
+.sidebar-root::-webkit-scrollbar {
+  display: none;
 }
 
 .tree-label {
-  font-size: 11px;
+  font-size: 13px; 
   font-weight: 700;
-  color: #4a5568;
+  color: #718096;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   margin-bottom: 16px;
@@ -39,8 +48,8 @@
 }
 
 .branch-text {
-  font-size: 14px;
-  color: #a0aec0;
+  font-size: 16px; 
+  color: #e2e8f0; 
   font-weight: 500;
 }
 
@@ -66,7 +75,7 @@
   top: 0;
   bottom: 10px;
   width: 1px;
-  background-color: #2d3748;
+  background-color: rgb(39, 39, 42); /* تغییر رنگ به rgb(39, 39, 42) */
 }
 
 .tree-item {
@@ -85,24 +94,97 @@
 }
 
 .item-text {
-  font-size: 14px;
+  font-size: 15px; 
   color: #718096;
 }
 
 .active-item .item-text, 
 .active-item .item-icon {
   color: #b794f4 !important;
+  font-weight: 600;
 }
 
 .item-icon {
-  font-size: 16px;
+  font-size: 18px;
   color: #4a5568;
 }
 
-.custom-scrollbar::-webkit-scrollbar {
-  width: 4px;
+/* بخش جداکننده */
+.section-divider {
+  height: 1px;
+  background-color: rgb(39, 39, 42); /* تغییر رنگ به rgb(39, 39, 42) */
+  margin: 20px 8px;
 }
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #2d3748;
+
+/* استایل کارت فیلتر */
+.filter-card {
+  background-color: #1c1b22;
+  border: 1px solid rgb(39, 39, 42); /* تغییر رنگ به rgb(39, 39, 42) */
   border-radius: 10px;
+  padding: 12px;
+  margin-top: 10px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.card-title {
+  font-size: 16px; 
+  font-weight: 500;
+  color: #fff;
+  margin: 0;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  color: #718096;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.badges-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.chakra-badge {
+  background-color: rgba(159, 122, 234, 0.1);
+  color: #d6bcfa;
+  border: 1px solid rgba(159, 122, 234, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 13px; 
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgb(39, 39, 42); /* تغییر رنگ به rgb(39, 39, 42) */
+  padding-top: 8px;
+}
+
+.more-link, .text-link-btn {
+  background: none;
+  border: none;
+  color: #718096;
+  font-size: 13px; 
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.text-link-btn:disabled {
+  opacity: 0.3;
+  text-decoration: none;
+  cursor: not-allowed;
 }

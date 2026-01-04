@@ -1,3 +1,4 @@
+// فایل: transaction-sidebar.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -10,12 +11,19 @@ import { CommonModule } from '@angular/common';
 })
 export class TransactionSidebar {
   menus: any = {
-    month: true, // طبق عکس پیش‌فرض باز است
+    month: true,
     day: false,
     year: false,
     misc: false,
     budget: false
   };
+
+  categories = [
+    'Credit Card Payments', 'Entertainment', 'Gas', 
+    'Groceries', 'Housing', 'Income'
+  ];
+  months = ['January', 'February', 'March', 'April', 'May', 'June'];
+  years = ['2023', '2024', '2025', '2026'];
 
   toggleMenu(menuName: string) {
     this.menus[menuName] = !this.menus[menuName];

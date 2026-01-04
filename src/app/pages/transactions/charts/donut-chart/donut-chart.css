@@ -1,0 +1,14 @@
+.chart-card {
+  background-color: #1c1b22;
+  border: 1px solid rgb(39, 39, 42); /* دقیقاً همان بوردری که گفتی */
+  border-radius: 12px;
+  padding: 20px;
+  width: 100%;
+}
+
+.chart-title {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+}
