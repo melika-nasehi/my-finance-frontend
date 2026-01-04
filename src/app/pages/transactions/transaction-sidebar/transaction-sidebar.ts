@@ -3,13 +3,21 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-transaction-sidebar',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './transaction-sidebar.html',
-  styleUrl: './transaction-sidebar.css',
+  styleUrl: './transaction-sidebar.css'
 })
 export class TransactionSidebar {
-  categories = [
-    'Credit Card Payments', 'Entertainment', 'Gas', 
-    'Groceries', 'Housing', 'Income', 'Travel'
-  ];
+  menus: any = {
+    month: true, // طبق عکس پیش‌فرض باز است
+    day: false,
+    year: false,
+    misc: false,
+    budget: false
+  };
+
+  toggleMenu(menuName: string) {
+    this.menus[menuName] = !this.menus[menuName];
+  }
 }
