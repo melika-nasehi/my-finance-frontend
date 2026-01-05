@@ -31,6 +31,8 @@ export class AddNewTransaction implements OnInit {
 
   ngOnInit() {
     this.loadDropdownData();
+    console.log(this.newData);
+    //this.errorMessage = 'Manual Test Error';
   }
 
   loadDropdownData() {
@@ -38,14 +40,43 @@ export class AddNewTransaction implements OnInit {
     this.http.get<any[]>('http://127.0.0.1:8000/api/accounts/').subscribe(data => this.accounts = data);
   }
 
+  errorMessage: string = '';
+
   save() {
-    this.http.post('http://127.0.0.1:8000/api/transactions/', this.newData)
+    this.errorMessage = ''; 
+    
+    // یک آرایه برای ذخیره اسم فیلدهای خالی
+    let emptyFields = [];
+
+    if (!this.newData.amount) emptyFields.push('Amount');
+    if (!this.newData.desc) emptyFields.push('Description');
+    if (!this.newData.account) emptyFields.push('Account');
+    if (!this.newData.category) emptyFields.push('Category');
+
+    // اگر فیلد خالی وجود داشت
+    if (emptyFields.length > 0) {
+      // اسم فیلدها را با کاما به هم بچسبان
+      this.errorMessage = 'Please fill: ' + emptyFields.join(', ');
+      return;
+    }
+
+    // اگر همه پر بودند، ارسال به سرور
+    const payload = {
+      ...this.newData,
+      amount: Number(this.newData.amount),
+      account: Number(this.newData.account),
+      category: Number(this.newData.category)
+    };
+
+    this.http.post('http://127.0.0.1:8000/api/transaction/main/', payload)
       .subscribe({
-        next: () => {
+        next: (res) => {
           this.saved.emit();
           this.close.emit();
         },
-        error: (err) => alert('خطا در ذخیره! فیلدها را چک کنید.')
+        error: (err) => {
+          this.errorMessage = 'Server error. Please try again.';
+        }
       });
   }
 }

@@ -34,3 +34,72 @@ input, select {
   padding: 10px;
   border-radius: 6px;
 }
+
+/* کانتینر اصلی تاریخ */
+.datepicker-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.custom-datepicker {
+  width: 100%;
+  background: #09090b !important; /* مشکی اصلی */
+  border: 1px solid rgb(39, 39, 42) !important; /* بوردر همیشگی */
+  color: white;
+  padding: 10px 12px;
+  border-radius: 6px;
+  outline: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* تغییر رنگ آیکون پیش‌فرض تقویم در مرورگرهای Chrome/Edge */
+.custom-datepicker::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* سفید کردن آیکون تقویم پیش‌فرض */
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.custom-datepicker::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* استایل آیکون تقویم سفارشی ما (اگه نخواستی پاکش کن) */
+.calendar-icon {
+  position: absolute;
+  right: 12px;
+  width: 16px;
+  height: 16px;
+  color: #a1a1aa;
+  pointer-events: none; /* کلیک از روش رد شه بره روی اینپوت */
+}
+
+.error-box {
+  background: rgba(248, 113, 113, 0.1); /* Soft red tint */
+  border: 1px solid rgba(248, 113, 113, 0.4); 
+  color: #fca5a5; /* Light red text */
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.error-box svg {
+  flex-shrink: 0;
+  color: #f87171;
+}
+
+.error-box {
+  /* استایل‌های قبلی بماند، فقط اینها را اضافه کن */
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
