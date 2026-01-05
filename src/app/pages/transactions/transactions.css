@@ -25,13 +25,13 @@
   display: flex;
   gap: 20px;
   margin-bottom: 30px;
-  flex-wrap: wrap; /* برای نمایش درست در موبایل */
+  flex-wrap: wrap;
 }
 
 .chart-wrapper {
   flex: 1;
   min-width: 300px;
-  background: #1c1b22; /* رنگ پس‌زمینه کارت‌ها مشابه عکس */
+  background: #1c1b22; 
   border-radius: 12px;
   padding: 20px;
   border: 1px solid #2d3748;
@@ -54,7 +54,7 @@
 
 .donut-card {
   width: 350px;
-  flex-shrink: 0; /* اجازه نده کوچک‌تر از ۳۵۰ شود */
+  flex-shrink: 0; 
   background: #1c1b22;
   padding: 24px;
   border-radius: 20px;
@@ -64,8 +64,8 @@
 }
 
 .bar-card {
-  flex-grow: 1; /* تمام فضای باقی‌مانده را بگیر */
-  min-width: 0; /* برای اینکه ApexCharts بفهمد باید عرض والد را محاسبه کند */
+  flex-grow: 1; 
+  min-width: 0; 
   background: #1c1b22;;
   padding: 24px;
   border-radius: 20px;

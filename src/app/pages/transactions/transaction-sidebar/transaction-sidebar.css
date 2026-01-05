@@ -170,7 +170,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid rgb(39, 39, 42); /* تغییر رنگ به rgb(39, 39, 42) */
+  border-top: 1px solid rgb(39, 39, 42); 
   padding-top: 8px;
 }
 

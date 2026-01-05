@@ -6,19 +6,30 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TransactionService {
-  private apiUrl = 'http://127.0.0.1:8000/api/transaction/category-expenses/'; 
+  private baseUrl = 'http://127.0.0.1:8000/api/transaction'; 
+  private baseUrl2 = 'http://127.0.0.1:8000/api';
 
   constructor(private http: HttpClient) { }
 
-  getCategoryExpenses(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+  getCategoryExpenses(period: string = 'current-month'): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/category-expenses/?period=${period}`);
   }
 
-  getDailyExpenses(): Observable<any> {
-  return this.http.get<any>('http://127.0.0.1:8000/api/transaction/daily-expenses/');
-}
+  getDailyExpenses(period: string = 'current-month'): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/daily-expenses/?period=${period}`);
+  }
 
-  getGroupedTransactions(): Observable<any> {
-    return this.http.get<any>('http://127.0.0.1:8000/api/transaction/grouped/');
+  getGroupedTransactions(period: string = 'current-month', category?: string): Observable<any> {
+    let url = `${this.baseUrl}/grouped/?period=${period}`;
+    
+    if (category) {
+      url += `&category=${category}`;
+    }
+    
+    return this.http.get<any>(url);
+  }
+
+  getCategories(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.baseUrl2}/categories/`);
   }
 }

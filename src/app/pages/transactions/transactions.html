@@ -1,6 +1,11 @@
 <div class="transactions-layout flex h-screen bg-[#0b0e11] text-white">
   <div class="sidebar-wrapper h-full shadow-xl">
-    <app-transaction-sidebar></app-transaction-sidebar>
+    <div class="sidebar-wrapper h-full shadow-xl">
+  <app-transaction-sidebar 
+  (filterChanged)="onFilterUpdate($event)"
+  (categoryChanged)="onCategoryFilter($event)"> 
+</app-transaction-sidebar>
+</div>
   </div>
 
   <main class="content-wrapper flex-1 h-full overflow-y-auto p-8 custom-scrollbar">
