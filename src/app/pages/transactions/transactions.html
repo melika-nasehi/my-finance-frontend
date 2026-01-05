@@ -1,16 +1,30 @@
 <div class="transactions-layout flex h-screen bg-[#0b0e11] text-white">
-  
   <div class="sidebar-wrapper h-full shadow-xl">
     <app-transaction-sidebar></app-transaction-sidebar>
   </div>
 
   <main class="content-wrapper flex-1 h-full overflow-y-auto p-8 custom-scrollbar">
-    
-    <div class="charts-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="charts-main-container">
       
-      <app-donut-chart></app-donut-chart>
-
+      <div class="donut-card">
+        <h3 class="chart-header">Categories</h3>
+        <app-donut-chart [series]="chartData" [labels]="chartLabels" [colors]="chartColors"></app-donut-chart>
       </div>
+
+      <div class="bar-card">
+        <h3 class="chart-header">Weekly Spending (Sat - Fri)</h3>
+        <app-bar-chart [data]="barData" [categories]="barLabels"></app-bar-chart>
+      </div>
+
+    </div>
+
+    <div class="table-section mt-4">
+      <app-transaction-table 
+        [groups]="groupedTransactions"
+        [grandTotalExpense]="totalExpense"
+        [grandTotalDeposit]="totalDeposit">
+      </app-transaction-table>
+    </div>
 
   </main>
 </div>

@@ -1,0 +1,54 @@
+<div class="modal-backdrop">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>New Transaction</h2>
+      <button (click)="close.emit()">×</button>
+    </div>
+
+    <div class="form-grid">
+      <div class="input-group">
+        <label>Date</label>
+        <input type="date" [(ngModel)]="newData.date">
+      </div>
+
+      <div class="input-group">
+        <label>Amount</label>
+        <input type="number" [(ngModel)]="newData.amount" placeholder="0.00">
+      </div>
+
+      <div class="input-group full-width">
+        <label>Description</label>
+        <input type="text" [(ngModel)]="newData.desc" placeholder="Details...">
+      </div>
+
+      <div class="input-group">
+        <label>Account</label>
+        <select [(ngModel)]="newData.account">
+          <option [ngValue]="null" disabled>Select Account</option>
+          <option *ngFor="let acc of accounts" [value]="acc.id">{{ acc.name }}</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label>Category</label>
+        <select [(ngModel)]="newData.category">
+          <option [ngValue]="null" disabled>Select Category</option>
+          <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label>Kind</label>
+        <select [(ngModel)]="newData.kind">
+          <option value="outcome">Outcome</option>
+          <option value="income">Income</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="close.emit()">Cancel</button>
+      <button class="btn-save" (click)="save()">Create</button>
+    </div>
+  </div>
+</div>
