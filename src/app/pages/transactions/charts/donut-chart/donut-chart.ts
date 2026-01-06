@@ -7,8 +7,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
   standalone: true,
   imports: [CommonModule, NgApexchartsModule],
   template: `
-    <div class="donut-wrapper" *ngIf="series && series.length > 0">
-      <apx-chart
+    <div class="donut-wrapper">
+      <apx-chart *ngIf="series && series.length > 0"
         [series]="series"
         [chart]="chartOptions.chart"
         [labels]="labels"
@@ -16,7 +16,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
         [legend]="chartOptions.legend"
         [stroke]="chartOptions.stroke"
         [plotOptions]="chartOptions.plotOptions"
-        [dataLabels]="chartOptions.dataLabels">
+        [dataLabels]="chartOptions.dataLabels"
+        [noData]="chartOptions.noData">
       </apx-chart>
     </div>
   `,
@@ -83,12 +84,14 @@ export class DonutChart implements OnChanges {
       markers: {
         radius: 12
       }
-    }
+    },
+    noData: {
+    text: 'No Data Available',
+    style: { color: '#718096', fontSize: '16px' }
+  },
   };
 
   ngOnChanges(changes: SimpleChanges) {
-    // دونات چارت معمولاً با تغییر رفرنس دیتا خودش را آپدیت می‌کند
-    // اما برای اطمینان از صحت رندر در تب‌ها، این متد را داریم
     if (changes['series'] || changes['labels']) {
       this.chartOptions = {
         ...this.chartOptions

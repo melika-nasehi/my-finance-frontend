@@ -22,7 +22,7 @@ export class AddNewTransaction implements OnInit {
     date: new Date().toISOString().split('T')[0],
     amount: null,
     desc: '',
-    kind: 'outcome',
+    kind: 'expense',
     account: null,  // آیدی حساب انتخابی
     category: null  // آیدی دسته انتخابی
   };

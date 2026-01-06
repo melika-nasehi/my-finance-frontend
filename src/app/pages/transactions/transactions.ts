@@ -29,6 +29,7 @@ export class Transactions implements OnInit, AfterViewInit {
 
   budgetData: any[] = [];
   viewMode: 'transactions' | 'budget' = 'transactions';
+  activeCategory: string = '';
 
   constructor(
     private transactionService: TransactionService,
@@ -119,13 +120,25 @@ export class Transactions implements OnInit, AfterViewInit {
   }
 
   onCategoryFilter(categoryName: string) {
-  this.transactionService.getGroupedTransactions(this.activeView, categoryName).subscribe({
-    next: (res) => {
-      this.groupedTransactions = res.groups;
-      this.totalExpense = res.grand_total_expense;
-      this.totalDeposit = res.grand_total_deposit;
-      this.cdr.detectChanges();
-    }
-  });
-}
+    this.activeCategory = categoryName;
+
+    this.transactionService.getGroupedTransactions(this.activeView, categoryName).subscribe(res => {
+    this.groupedTransactions = [...res.groups];
+    this.cdr.detectChanges();
+    });
+
+    this.transactionService.getCategoryExpenses(this.activeView, categoryName).subscribe(data => {
+    this.chartData = data.series.length > 0 ? [...data.series] : [];
+    this.chartLabels = data.labels.length > 0 ? [...data.labels] : [];
+    this.chartColors = data.colors.length > 0 ? [...data.colors] : ['#718096']; // رنگ پیش‌فرض اگر خالی بود
+    this.cdr.detectChanges();
+    });
+  
+    this.transactionService.getDailyExpenses(this.activeView, categoryName).subscribe(data => {
+    this.barData = [...data.data];
+    this.barLabels = [...data.categories];
+    this.cdr.detectChanges();
+    });
+    
+  }
 }

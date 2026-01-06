@@ -29,8 +29,9 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 export class BarChart implements OnChanges {
   @Input() data: number[] = [];
   @Input() categories: string[] = [];
+  @Input() colors: string[] = [];
 
-  private myColors = ['#22c55e', '#ef4444', '#a855f7', '#3b82f6', '#f59e0b', '#ec4899', '#14b8a6', '#64748b', '#6366f1'];
+  //private myColors = ['#22c55e', '#ef4444', '#a855f7', '#3b82f6', '#f59e0b', '#ec4899', '#14b8a6', '#64748b', '#6366f1'];
 
   public chartOptions: any = {
     series: [{ name: 'Daily Expense', data: [] }],
@@ -52,7 +53,7 @@ export class BarChart implements OnChanges {
       }
     },
     dataLabels: { enabled: false },
-    colors: this.myColors,
+    colors: ['#22c55e'],
     xaxis: {
       categories: [],
       axisBorder: { show: false },
@@ -69,7 +70,7 @@ export class BarChart implements OnChanges {
   };
 
   ngOnChanges(changes: SimpleChanges) {
-    if ((changes['data'] || changes['categories']) && this.data.length > 0) {
+    if (changes['data'] || changes['categories'] || changes['colors']) {
       this.chartOptions = {
         ...this.chartOptions,
         series: [{ name: 'Expenses', data: [...this.data] }],
@@ -77,7 +78,7 @@ export class BarChart implements OnChanges {
           ...this.chartOptions.xaxis, 
           categories: [...this.categories] 
         },
-        colors: this.myColors
+        colors: (this.colors && this.colors.length > 0) ? this.colors : ['#22c55e']
       };
     }
   }

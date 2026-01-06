@@ -11,12 +11,22 @@ export class TransactionService {
 
   constructor(private http: HttpClient) { }
 
-  getCategoryExpenses(period: string = 'current-month'): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/category-expenses/?period=${period}`);
+  getCategoryExpenses(period: string = 'current-month', category?: string): Observable<any> {
+  let url = `${this.baseUrl}/category-expenses/?period=${period}`;
+  if (category) {
+    url += `&category=${category}`;
   }
+  return this.http.get<any>(url);
+}
 
-  getDailyExpenses(period: string = 'current-month'): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/daily-expenses/?period=${period}`);
+  getDailyExpenses(period: string = 'current-month', category?: string): Observable<any> {
+    let url = `${this.baseUrl}/daily-expenses/?period=${period}`;
+    
+    if (category) {
+      url += `&category=${category}`;
+    }
+    
+    return this.http.get<any>(url);
   }
 
   getGroupedTransactions(period: string = 'current-month', category?: string): Observable<any> {
