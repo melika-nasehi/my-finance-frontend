@@ -33,4 +33,8 @@ export class AccountService {
   deleteAccount(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}${id}/`);
   }
+
+  getAccounts() {
+    return this.http.get<any[]>('http://127.0.0.1:8000/api/accounts/');
+}
 }

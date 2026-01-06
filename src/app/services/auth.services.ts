@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   private apiUrl = 'http://127.0.0.1:8000/api/token/';
 
@@ -15,6 +13,7 @@ export class AuthService {
       tap((response: any) => {
         localStorage.setItem('access_token', response.access);
         localStorage.setItem('refresh_token', response.refresh);
+        localStorage.setItem('username', credentials.username);
       })
     );
   }
@@ -22,5 +21,14 @@ export class AuthService {
   logout() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
+    localStorage.removeItem('username');
+  }
+
+  getUsername() {
+    return localStorage.getItem('username') || 'Guest';
+  }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('access_token');
   }
 }

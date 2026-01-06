@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AccountSummary } from './account-summary/account-summary';
 import { AccountList } from './account-list/account-list';
 import { AccountChart } from './account-chart/account-chart';
@@ -21,23 +21,41 @@ export class Account implements OnInit {
   totalLiabilities: number = 0;
   chartData: any = { series: [], dates: [], colors: [] };
 
-  constructor(private accountService: AccountService) {}
+  constructor(
+    private accountService: AccountService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.loadAccountData();
   }
 
   loadAccountData() {
-    this.accountService.getAccountSummary().subscribe({
-      next: (data) => {
-        this.assets = data.assets;
-        this.liabilities = data.liabilities;
-        this.netWorth = data.net_worth;
-        this.totalAssets = data.total_assets;
-        this.totalLiabilities = data.total_liabilities;
-        this.chartData = data.chart_data; 
-      },
-      error: (err) => console.error('Error fetching accounts:', err)
-    });
-  }
+  this.accountService.getAccountSummary().subscribe({
+    next: (data) => {
+      if (!data) return;
+
+      const mapAccount = (acc: any) => ({
+        id: acc.id,
+        name: acc.name,
+        balance: acc.balance,
+        type: acc.type ? acc.type : 'account', 
+        is_debt: acc.is_debt,
+        color: acc.color
+      });
+
+      this.assets = (data.assets || []).map(mapAccount);
+      this.liabilities = (data.liabilities || []).map(mapAccount);
+      
+      this.netWorth = data.net_worth || 0;
+      this.totalAssets = data.total_assets || 0;
+      this.totalLiabilities = data.total_liabilities || 0;
+      this.chartData = data.chart_data || { series: [], dates: [], colors: [] };
+
+      this.cdr.detectChanges();
+      console.log(data)
+    },
+    error: (err) => console.error('Error:', err)
+  });
+}
 }

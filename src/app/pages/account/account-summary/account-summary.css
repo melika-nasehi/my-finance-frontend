@@ -4,10 +4,12 @@
   column-gap: 16px;
   row-gap: 16px;
   width: 100%;
-  max-width: 1200px; /* عرض را کمی بیشتر کردم تا فضای بیشتری داشته باشد */
-  margin: 0 auto 24px auto; /* این خط باعث وسط‌چین شدن کل کانتینر می‌شود */
-  padding: 0 20px; /* ایجاد کمی فاصله از لبه‌های مانیتور */
+  max-width: 1200px;
+  margin: 0 auto 24px auto;
+  padding: 0 20px;
   box-sizing: border-box;
+  margin-left: 31px;
+  margin-bottom: 70px;
 }
 
 .stat-box {

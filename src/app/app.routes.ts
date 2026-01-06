@@ -2,6 +2,10 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
+    path: 'login',
+    loadComponent: () => import('./login/login').then(m => m.Login)
+  },
+  {
     path: 'home',
     loadComponent: () => import('./pages/home/home').then(m => m.Home)
   },
@@ -21,8 +25,6 @@ export const routes: Routes = [
     path: 'configuration',
     loadComponent: () => import('./pages/home/home').then(m => m.Home)
   },
-  // مسیر پیش‌فرض
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  // مسیر برای لینک‌های اشتباه
-  { path: '**', redirectTo: 'home' }
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'login' }
 ];

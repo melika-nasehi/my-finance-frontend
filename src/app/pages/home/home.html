@@ -1,1 +1,17 @@
-<p>home works!</p>
+<div class="min-h-screen bg-[#0b0e11] text-white p-8 flex flex-col items-center justify-center">
+  <div class="text-center space-y-4">
+    <h1 class="text-5xl font-extrabold tracking-tight">
+      Welcome back, <span class="text-blue-500">{{ username }}</span>! 👋
+    </h1>
+    <p class="text-gray-400 text-lg">
+      Everything looks good. Here’s what’s happening with your accounts today.
+    </p>
+    
+    <div class="mt-8">
+      <button routerLink="/accounts" 
+              class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-xl font-bold transition-all shadow-lg shadow-blue-900/20">
+        Go to Accounts
+      </button>
+    </div>
+  </div>
+</div>
