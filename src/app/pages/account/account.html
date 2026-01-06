@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-[#0b0e11] text-white p-8">
+<div class="dashboard-wrapper">
   
   <app-account-summary 
     [netWorth]="netWorth" 
@@ -6,19 +6,21 @@
     [totalLiabilities]="totalLiabilities">
   </app-account-summary>
 
-  <div class="grid grid-cols-12 gap-8 mt-10">
+  <div class="main-content">
     
-    <div class="col-span-12 lg:col-span-4">
+    <div class="side-panel">
       <app-account-list 
-      [assets]="assets"
-      [liabilities]="liabilities"></app-account-list>
+        [assets]="assets"
+        [liabilities]="liabilities">
+      </app-account-list>
     </div>
 
-    <!-- <div class="col-span-12 lg:col-span-8">
+    <div class="chart-panel">
       <app-account-chart 
-        [chartData]="chartData">
+          *ngIf="chartData && chartData.series && chartData.series.length > 0" 
+          [data]="chartData">
       </app-account-chart>
-    </div> -->
+    </div>
 
   </div>
 </div>

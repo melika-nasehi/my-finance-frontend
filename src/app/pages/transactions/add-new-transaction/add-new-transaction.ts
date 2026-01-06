@@ -37,8 +37,10 @@ export class AddNewTransaction implements OnInit {
 
   loadDropdownData() {
     this.http.get<any[]>('http://127.0.0.1:8000/api/categories/').subscribe(data => this.categories = data);
-    this.http.get<any[]>('http://127.0.0.1:8000/api/accounts/').subscribe(data => this.accounts = data);
-  }
+    this.http.get<any>('http://127.0.0.1:8000/api/accounts/summary/').subscribe(data => {
+      this.accounts = [...data.assets, ...data.liabilities];
+    });
+}
 
   errorMessage: string = '';
 

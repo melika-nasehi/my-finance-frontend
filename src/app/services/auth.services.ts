@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+
   private apiUrl = 'http://127.0.0.1:8000/api/token/';
+  isLoggedInSignal = signal<boolean>(!!localStorage.getItem('access_token'));
 
   constructor(private http: HttpClient) { }
 
@@ -14,6 +16,7 @@ export class AuthService {
         localStorage.setItem('access_token', response.access);
         localStorage.setItem('refresh_token', response.refresh);
         localStorage.setItem('username', credentials.username);
+        this.isLoggedInSignal.set(true);
       })
     );
   }
@@ -22,6 +25,8 @@ export class AuthService {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('username');
+    localStorage.clear();
+    this.isLoggedInSignal.set(false);
   }
 
   getUsername() {

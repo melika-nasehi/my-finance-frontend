@@ -1,1 +1,13 @@
-<p>account-chart works!</p>
+
+    <div id="chart" style="background: #121212; padding: 20px; border-radius: 10px;">
+      <apx-chart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [xaxis]="xaxis"
+        [stroke]="chartOptions.stroke"
+        [fill]="chartOptions.fill"
+        [colors]="chartOptions.colors"
+        [yaxis]="chartOptions.yaxis"
+        [legend]="chartOptions.legend"
+      ></apx-chart>
+    </div>

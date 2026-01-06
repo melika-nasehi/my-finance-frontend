@@ -1,0 +1,25 @@
+.dashboard-wrapper {
+  background-color: #1c1b22;
+  min-height: 100vh;
+  padding: 30px;
+}
+
+.main-content {
+  display: flex; 
+  gap: 30px;    
+  margin-top: 30px;
+}
+
+.side-panel {
+  flex: 1;       
+  min-width: 350px;
+}
+
+.chart-panel {
+  flex: 2;      
+  background: #1c1b22;
+  border: 0px solid #30363d;
+  border-radius: 12px;
+  padding: 20px;
+  margin-left: 50px;
+}

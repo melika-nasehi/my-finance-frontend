@@ -35,6 +35,6 @@ export class AccountService {
   }
 
   getAccounts() {
-    return this.http.get<any[]>('http://127.0.0.1:8000/api/accounts/');
+    return this.http.get<any>(`${this.apiUrl}/summary/`);
 }
 }
