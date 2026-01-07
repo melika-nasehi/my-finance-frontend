@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-add-new-transaction',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, FormsModule],
   templateUrl: './add-new-transaction.html',
   styleUrls: ['./add-new-transaction.css']
@@ -14,7 +15,6 @@ export class AddNewTransaction implements OnInit {
   @Output() close = new EventEmitter<void>();
   @Output() saved = new EventEmitter<void>();
 
-  // لیست‌هایی که از بک‌هند می‌آیند
   categories: any[] = [];
   accounts: any[] = [];
 
@@ -23,8 +23,8 @@ export class AddNewTransaction implements OnInit {
     amount: null,
     desc: '',
     kind: 'expense',
-    account: null,  // آیدی حساب انتخابی
-    category: null  // آیدی دسته انتخابی
+    account: null,  
+    category: null 
   };
 
   constructor(private http: HttpClient) {}
@@ -37,8 +37,8 @@ export class AddNewTransaction implements OnInit {
 
   loadDropdownData() {
     this.http.get<any[]>('http://127.0.0.1:8000/api/categories/').subscribe(data => this.categories = data);
-    this.http.get<any>('http://127.0.0.1:8000/api/accounts/summary/').subscribe(data => {
-      this.accounts = [...data.assets, ...data.liabilities];
+    this.http.get<any>('http://127.0.0.1:8000/api/accounts/list/').subscribe(data => {
+      this.accounts = data ;
     });
 }
 
@@ -47,7 +47,6 @@ export class AddNewTransaction implements OnInit {
   save() {
     this.errorMessage = ''; 
     
-    // یک آرایه برای ذخیره اسم فیلدهای خالی
     let emptyFields = [];
 
     if (!this.newData.amount) emptyFields.push('Amount');
@@ -55,14 +54,11 @@ export class AddNewTransaction implements OnInit {
     if (!this.newData.account) emptyFields.push('Account');
     if (!this.newData.category) emptyFields.push('Category');
 
-    // اگر فیلد خالی وجود داشت
     if (emptyFields.length > 0) {
-      // اسم فیلدها را با کاما به هم بچسبان
       this.errorMessage = 'Please fill: ' + emptyFields.join(', ');
       return;
     }
 
-    // اگر همه پر بودند، ارسال به سرور
     const payload = {
       ...this.newData,
       amount: Number(this.newData.amount),

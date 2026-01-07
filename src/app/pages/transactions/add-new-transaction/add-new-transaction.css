@@ -26,7 +26,6 @@
 .full-width {
   grid-column: span 2;
 }
-/* همان رنگ بوردر rgb(39, 39, 42) را برای تمام اینپوت‌ها حفظ کن */
 input, select {
   background: #09090b !important;
   border: 1px solid rgb(39, 39, 42) !important;
@@ -35,7 +34,6 @@ input, select {
   border-radius: 6px;
 }
 
-/* کانتینر اصلی تاریخ */
 .datepicker-wrapper {
   position: relative;
   display: flex;
@@ -44,8 +42,8 @@ input, select {
 
 .custom-datepicker {
   width: 100%;
-  background: #09090b !important; /* مشکی اصلی */
-  border: 1px solid rgb(39, 39, 42) !important; /* بوردر همیشگی */
+  background: #09090b !important; 
+  border: 1px solid rgb(39, 39, 42) !important; 
   color: white;
   padding: 10px 12px;
   border-radius: 6px;
@@ -54,9 +52,8 @@ input, select {
   cursor: pointer;
 }
 
-/* تغییر رنگ آیکون پیش‌فرض تقویم در مرورگرهای Chrome/Edge */
 .custom-datepicker::-webkit-calendar-picker-indicator {
-  filter: invert(1); /* سفید کردن آیکون تقویم پیش‌فرض */
+  filter: invert(1); 
   cursor: pointer;
   opacity: 0.6;
 }
@@ -65,20 +62,19 @@ input, select {
   opacity: 1;
 }
 
-/* استایل آیکون تقویم سفارشی ما (اگه نخواستی پاکش کن) */
 .calendar-icon {
   position: absolute;
   right: 12px;
   width: 16px;
   height: 16px;
   color: #a1a1aa;
-  pointer-events: none; /* کلیک از روش رد شه بره روی اینپوت */
+  pointer-events: none; 
 }
 
 .error-box {
-  background: rgba(248, 113, 113, 0.1); /* Soft red tint */
+  background: rgba(248, 113, 113, 0.1); 
   border: 1px solid rgba(248, 113, 113, 0.4); 
-  color: #fca5a5; /* Light red text */
+  color: #fca5a5; 
   padding: 12px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -95,7 +91,6 @@ input, select {
 }
 
 .error-box {
-  /* استایل‌های قبلی بماند، فقط اینها را اضافه کن */
   animation: fadeIn 0.3s ease-in-out;
 }
 
