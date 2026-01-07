@@ -1,5 +1,4 @@
 <div class="dashboard-wrapper">
-  
   <app-account-summary 
     [netWorth]="netWorth" 
     [totalAssets]="totalAssets" 
@@ -7,20 +6,23 @@
   </app-account-summary>
 
   <div class="main-content">
-    
     <div class="side-panel">
-      <app-account-list 
-        [assets]="assets"
-        [liabilities]="liabilities">
-      </app-account-list>
+      <app-account-list [assets]="assets" [liabilities]="liabilities"></app-account-list>
     </div>
 
     <div class="chart-panel">
+      <div class="chart-filters">
+        <button *ngFor="let p of periods" 
+                (click)="setPeriod(p.value)" 
+                [class.active]="currentPeriod === p.value">
+          {{ p.label }}
+        </button>
+      </div>
+
       <app-account-chart 
           *ngIf="chartData && chartData.series && chartData.series.length > 0" 
           [data]="chartData">
       </app-account-chart>
     </div>
-
   </div>
 </div>

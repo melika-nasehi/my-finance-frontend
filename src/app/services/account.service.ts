@@ -22,8 +22,8 @@ export class AccountService {
 
   constructor(private http: HttpClient) { }
 
-  getAccountSummary(): Observable<AccountSummaryData> {
-    return this.http.get<AccountSummaryData>(`${this.apiUrl}summary/`);
+  getAccountSummary(period: string = '1m'): Observable<AccountSummaryData> {
+    return this.http.get<AccountSummaryData>(`${this.apiUrl}summary/?period=${period}`);
   }
 
   createAccount(accountData: any): Observable<any> {

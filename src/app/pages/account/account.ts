@@ -20,6 +20,15 @@ export class Account implements OnInit {
   totalAssets: number = 0;
   totalLiabilities: number = 0;
   chartData: any = { series: [], dates: [], colors: [] };
+  loading = false;
+  currentPeriod: string = '1m'; 
+  periods = [
+    { label: '2W', value: '2w' },
+    { label: '1M', value: '1m' },
+    { label: '3M', value: '3m' },
+    { label: '1Y', value: '1y' },
+    { label: 'ALL', value: 'all' }
+  ];
 
   constructor(
     private accountService: AccountService,
@@ -30,32 +39,38 @@ export class Account implements OnInit {
     this.loadAccountData();
   }
 
-  loadAccountData() {
-  this.accountService.getAccountSummary().subscribe({
-    next: (data) => {
-      if (!data) return;
+  setPeriod(p: string) {
+    this.currentPeriod = p;
+    this.loadAccountData();
+  }
 
-      const mapAccount = (acc: any) => ({
-        id: acc.id,
-        name: acc.name,
-        balance: acc.balance,
-        type: acc.type ? acc.type : 'account', 
-        is_debt: acc.is_debt,
-        color: acc.color
-      });
+    loadAccountData(period: string = this.currentPeriod) {
+    this.currentPeriod = period;
 
-      this.assets = (data.assets || []).map(mapAccount);
-      this.liabilities = (data.liabilities || []).map(mapAccount);
-      
-      this.netWorth = data.net_worth || 0;
-      this.totalAssets = data.total_assets || 0;
-      this.totalLiabilities = data.total_liabilities || 0;
-      this.chartData = data.chart_data || { series: [], dates: [], colors: [] };
+    this.accountService.getAccountSummary(period).subscribe({
+      next: (data) => {
+        if (!data) return;
 
-      this.cdr.detectChanges();
-      console.log(data)
-    },
-    error: (err) => console.error('Error:', err)
-  });
-}
+        const mapAccount = (acc: any) => ({
+          id: acc.id,
+          name: acc.name,
+          balance: acc.balance,
+          type: acc.type || 'account', 
+          is_debt: acc.is_debt,
+          color: acc.color
+        });
+
+        this.assets = (data.assets || []).map(mapAccount);
+        this.liabilities = (data.liabilities || []).map(mapAccount);
+        this.netWorth = data.net_worth || 0;
+        this.totalAssets = data.total_assets || 0;
+        this.totalLiabilities = data.total_liabilities || 0;
+
+        this.chartData = data.chart_data || { series: [], dates: [], colors: [] };
+
+        this.cdr.detectChanges();
+      },
+      error: (err) => console.error('Error fetching account data:', err)
+    });
+  }
 }

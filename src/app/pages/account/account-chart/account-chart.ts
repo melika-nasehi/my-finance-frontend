@@ -43,9 +43,32 @@ export class AccountChart implements OnChanges {
         type: "area",
         height: 350,
         toolbar: { show: false },
-        animations: { enabled: true }
+        animations: { enabled: true },
+        fontFamily: 'inherit',
+        background: 'transparent'
       },
-      stroke: { curve: "smooth", width: 2 },
+      dataLabels: {
+        enabled: false 
+      },
+      tooltip: {
+        enabled: true,
+        theme: 'dark',
+        shared: true,
+        intersect: false,
+        y: {
+          formatter: (val: number) => {
+            return val.toLocaleString() + " $";
+          }
+        }
+      },
+      stroke: { 
+        curve: "smooth", 
+        width: 3 
+      },
+      markers: {
+        size: 0,
+        hover: { size: 5 }
+      },
       fill: {
         type: "gradient",
         gradient: {
@@ -55,8 +78,19 @@ export class AccountChart implements OnChanges {
           stops: [20, 100]
         }
       },
-      legend: { labels: { colors: '#ccc' } },
-      yaxis: { labels: { style: { colors: '#888' } } }
+      legend: { 
+        position: 'top',
+        horizontalAlign: 'right',
+        labels: { colors: '#ccc' } 
+      },
+      yaxis: { 
+        labels: { 
+          style: { colors: '#888' },
+          formatter: (val: number) => {
+            return val >= 1000 ? (val / 1000).toFixed(1) + 'k' : val;
+          }
+        } 
+      }
     };
   }
 
@@ -65,7 +99,15 @@ export class AccountChart implements OnChanges {
     this.chartOptions.colors = this.data.series.map(s => s.color);
     this.xaxis = {
       categories: this.data.dates,
-      labels: { style: { colors: '#888' } }
+      axisBorder: { show: false },
+      axisTicks: { show: false },
+      labels: { 
+        rotate: -45, 
+        rotateAlways: false,
+        hideOverlappingLabels: true,
+        style: { colors: '#888', fontSize: '11px' } 
+      },
+      tickAmount: 10
     };
   }
 }

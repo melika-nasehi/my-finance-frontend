@@ -23,3 +23,32 @@
   padding: 20px;
   margin-left: 50px;
 }
+
+.chart-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 15px;
+  justify-content: flex-end;
+}
+
+.chart-filters button {
+  background: #1c1b22;
+  border: 1px solid #27272a;
+  color: #a1a1aa;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.chart-filters button:hover {
+  border-color: #52525b;
+  color: white;
+}
+
+.chart-filters button.active {
+  background: white;
+  color: black;
+  border-color: white;
+}
