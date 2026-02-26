@@ -1,0 +1,33 @@
+.plans-container {
+  padding: 30px;
+  background: #0b0e11;
+  min-height: 100vh;
+}
+
+.plans-header {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.label {
+  color: #71717a;
+  font-size: 0.8rem;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.simulation-section {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

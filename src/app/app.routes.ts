@@ -19,7 +19,7 @@ export const routes: Routes = [
   },
   {
     path: 'plans',
-    loadComponent: () => import('./pages/home/home').then(m => m.Home)
+    loadComponent: () => import('./pages/plans/plans').then(m => m.Plans)
   },
   {
     path: 'configuration',
