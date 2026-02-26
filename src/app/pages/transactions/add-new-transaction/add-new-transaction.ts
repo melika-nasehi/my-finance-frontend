@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-add-new-transaction',
   standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  //changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, FormsModule],
   templateUrl: './add-new-transaction.html',
   styleUrls: ['./add-new-transaction.css']
@@ -27,7 +27,7 @@ export class AddNewTransaction implements OnInit {
     category: null 
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.loadDropdownData();
@@ -36,11 +36,17 @@ export class AddNewTransaction implements OnInit {
   }
 
   loadDropdownData() {
-    this.http.get<any[]>('http://127.0.0.1:8000/api/categories/').subscribe(data => this.categories = data);
-    this.http.get<any>('http://127.0.0.1:8000/api/accounts/list/').subscribe(data => {
-      this.accounts = data ;
+    this.http.get<any[]>('http://127.0.0.1:8000/api/categories/').subscribe(data => {
+      this.categories = data;
+      this.cdr.detectChanges();
     });
-}
+    
+    this.http.get<any>('http://127.0.0.1:8000/api/accounts/').subscribe(data => {
+      this.accounts = data;
+      this.cdr.detectChanges(); 
+    });
+  }
+
 
   errorMessage: string = '';
 

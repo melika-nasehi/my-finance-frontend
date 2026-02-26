@@ -36,5 +36,6 @@ export class AccountService {
 
   getAccounts() {
     return this.http.get<any>(`${this.apiUrl}/summary/`);
-}
+  }
+
 }

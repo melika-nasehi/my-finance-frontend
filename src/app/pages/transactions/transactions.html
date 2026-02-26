@@ -31,7 +31,8 @@
       <app-transaction-table 
         [groups]="groupedTransactions"
         [grandTotalExpense]="totalExpense"
-        [grandTotalDeposit]="totalDeposit">
+        [grandTotalDeposit]="totalDeposit"
+        (refreshData)="onFilterUpdate(activeView)">
       </app-transaction-table>
     </div>
 

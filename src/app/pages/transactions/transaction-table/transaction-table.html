@@ -74,5 +74,4 @@
 <app-add-new-transaction 
   *ngIf="showAddModal" 
   (close)="showAddModal = false"
-  (saved)="showAddModal = false; ">
-</app-add-new-transaction>
+  (saved)="onTransactionSaved()"> </app-add-new-transaction>

@@ -52,3 +52,27 @@
   color: black;
   border-color: white;
 }
+
+
+.side-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.add-account-btn {
+  background: white;
+  color: black;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.add-account-btn:hover {
+  opacity: 0.9;
+}

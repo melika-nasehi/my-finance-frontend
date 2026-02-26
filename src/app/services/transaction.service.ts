@@ -42,4 +42,8 @@ export class TransactionService {
   getCategories(): Observable<string[]> {
     return this.http.get<string[]>(`${this.baseUrl2}/categories/`);
   }
+
+  getLatestTransactions(): Observable<any[]> {
+  return this.http.get<any[]>('http://127.0.0.1:8000/api/transaction/latest/');
+  }
 }

@@ -4,16 +4,18 @@ import { AccountList } from './account-list/account-list';
 import { AccountChart } from './account-chart/account-chart';
 import { AccountService } from '../../services/account.service';
 import { CommonModule } from '@angular/common';
+import { AddAccount } from './add-account/add-account';
 
 @Component({
   selector: 'app-account',
   standalone: true,
-  imports: [AccountSummary, AccountList, AccountChart, CommonModule],
+  imports: [AccountSummary, AccountList, AccountChart, CommonModule, AddAccount],
   providers: [AccountService],
   templateUrl: './account.html',
   styleUrl: './account.css',
 })
 export class Account implements OnInit {
+  showAddAccount = false;
   assets: any[] = [];
   liabilities: any[] = [];
   netWorth: number = 0;
@@ -44,7 +46,7 @@ export class Account implements OnInit {
     this.loadAccountData();
   }
 
-    loadAccountData(period: string = this.currentPeriod) {
+  loadAccountData(period: string = this.currentPeriod) {
     this.currentPeriod = period;
 
     this.accountService.getAccountSummary(period).subscribe({
@@ -73,4 +75,14 @@ export class Account implements OnInit {
       error: (err) => console.error('Error fetching account data:', err)
     });
   }
+
+  deleteAccount(id: number) {
+    this.accountService.deleteAccount(id).subscribe({
+      next: () => {
+        this.loadAccountData();
+      },
+      error: (err) => console.error('Delete failed:', err)
+    });
+  }
+
 }
