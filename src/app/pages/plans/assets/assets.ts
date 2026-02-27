@@ -21,9 +21,14 @@ export class Assets {
     asset_type: 'liquid',
     growth_rate: 0
   };
+
   showImportModal = false;
   availableAccounts: any[] = [];
   selectedAccountIds: number[] = [];
+
+  isEditMode = false;
+  editingId: number | null = null;
+
 
   constructor(private plansService: PlansService, private cdr: ChangeDetectorRef) {}
 
@@ -39,10 +44,17 @@ export class Assets {
   }
 
   onSubmit() {
-    this.plansService.addAsset(this.newAsset).subscribe(() => {
-      this.loadData();
-      this.closeModal();
-    });
+    if (this.isEditMode && this.editingId) {
+      this.plansService.updateAsset(this.editingId, this.newAsset).subscribe(() => {
+        this.loadData();
+        this.closeModal();
+      });
+    } else {
+      this.plansService.addAsset(this.newAsset).subscribe(() => {
+        this.loadData();
+        this.closeModal();
+      });
+    }
   }
 
   onDelete(id: number) {
@@ -55,6 +67,8 @@ export class Assets {
 
   closeModal() { 
     this.showModal = false;
+    this.isEditMode = false;
+    this.editingId = null;
     this.newAsset = { name: '', amount: 0, asset_type: 'liquid', growth_rate: 0 };
   }
 
@@ -92,6 +106,13 @@ export class Assets {
       this.loadData();
       this.showImportModal = false;
     });
+  }
+
+  onEdit(asset: any) {
+    this.isEditMode = true;
+    this.editingId = asset.id;
+    this.newAsset = { ...asset };
+    this.showModal = true;
   }
 
 }

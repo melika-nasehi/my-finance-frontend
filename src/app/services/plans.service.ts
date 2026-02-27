@@ -39,4 +39,25 @@ export class PlansService {
   importSelectedAccounts(accountIds: number[]): Observable<any> {
     return this.http.post(`${this.apiUrl}assets/import_selected/`, { account_ids: accountIds });
   }
+
+  //cash-flow
+  getCashFlows(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}cash-flow/`);
+  }
+
+  addCashFlow(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}cash-flow/`, data);
+  }
+
+  deleteCashFlow(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}cash-flow/${id}/`);
+  }
+
+  updateCashFlow(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}cash-flow/${id}/`, data);
+  }
+
+  updateAsset(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}assets/${id}/`, data);
+  }
 }

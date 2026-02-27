@@ -1,5 +1,5 @@
 .assets-card {
-  background: #18181b;
+  background: #15141b;
   border: 1px solid #27272a;
   border-radius: 12px;
   padding: 24px;
@@ -233,3 +233,21 @@
 .selection-area::-webkit-scrollbar-thumb:hover {
     background: #3e97ff; /* هماهنگ با رنگ اصلی برند شما */
 }
+
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-btn, .delete-btn {
+  background: none;
+  border: none;
+  color: #52525b;
+  cursor: pointer;
+  padding: 4px;
+  transition: all 0.2s;
+}
+
+.edit-btn:hover { color: #3b82f6; }
+.delete-btn:hover { color: #ef4444; }
