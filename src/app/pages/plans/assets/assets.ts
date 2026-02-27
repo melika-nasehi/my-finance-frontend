@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PlansService } from '../../../services/plans.service';
 
 @Component({
   selector: 'app-assets',
@@ -8,14 +9,22 @@ import { CommonModule } from '@angular/common';
   styleUrl: './assets.css',
 })
 export class Assets {
-  assets = [
-    { name: 'Checking Account', type: 'Liquid', amount: 8500 },
-    { name: 'Savings Account', type: 'Liquid', amount: 15000, growth: '2.0%' },
-    { name: 'Investment Portfolio', type: 'Illiquid', amount: 32000, growth: '7.0%' }
-  ];
+  assets: any[] = [];
 
-  constructor() {}
+  constructor(private plansService: PlansService) {}
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.loadData();
+  }
+
+  loadData() {
+    this.plansService.getAssets().subscribe(data => {
+      this.assets = data;
+    });
+  }
+
+  onDelete(id: number) {
+    this.plansService.deleteAsset(id).subscribe(() => this.loadData());
+  }
 
 }
