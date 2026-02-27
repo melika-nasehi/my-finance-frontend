@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Assets } from './assets/assets';
 
 @Component({
@@ -7,6 +7,11 @@ import { Assets } from './assets/assets';
   templateUrl: './plans.html',
   styleUrl: './plans.css',
 })
-export class Plans {
-
+export class Plans implements OnInit{
+  username: string = '';
+  
+  ngOnInit() {
+    const storedUser = localStorage.getItem('username'); 
+    this.username = storedUser ? storedUser : 'Guest';
+  }
 }

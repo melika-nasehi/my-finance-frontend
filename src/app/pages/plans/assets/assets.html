@@ -2,9 +2,7 @@
   <div class="card-header">
     <div class="header-content">
       <div class="icon-wrapper">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 1v22m5-18H6.9a3 3 0 0 0 0 6h10.2a3 3 0 0 1 0 6H6.2"></path>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22m5-18H6.9a3 3 0 0 0 0 6h10.2a3 3 0 0 1 0 6H6.2"></path></svg>
       </div>
       <div class="text-group">
         <h3>Assets</h3>
@@ -14,6 +12,54 @@
   </div>
 
   <div class="assets-list">
+
+    <button class="import-btn" (click)="openImportModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" style="margin-right: 8px;">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4m4-5 5 5 5-5m-5 5V3"></path>
+      </svg>
+      Import from accounts
+    </button>
+
+      <div class="modal-overlay" *ngIf="showImportModal" (click)="showImportModal = false">
+        <div class="import-card" (click)="$event.stopPropagation()">
+          <div class="import-header">
+            <div class="title-section">
+              <h4>Import Accounts</h4>
+              <p>Sync your balances with this plan</p>
+            </div>
+            <button class="close-x" (click)="showImportModal = false">&times;</button>
+          </div>
+
+          <div class="selection-area">
+            <div *ngFor="let acc of availableAccounts" 
+                class="acc-row" 
+                [class.selected]="selectedAccountIds.includes(acc.id)"
+                (click)="toggleAccountSelection(acc.id)">
+              
+              <div class="acc-info">
+                <span class="acc-name">{{ acc.name }}</span>
+                <span class="acc-type">{{ acc.type || 'Account' }}</span>
+              </div>
+              <div class="acc-amount">
+                ${{ acc.balance | number }}
+                <div class="custom-checkbox">
+                  <div class="inner-dot" *ngIf="selectedAccountIds.includes(acc.id)"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="import-footer">
+            <button class="btn-cancel-link" (click)="showImportModal = false">Discard</button>
+            <button class="btn-confirm-import" 
+                    [disabled]="selectedAccountIds.length === 0" 
+                    (click)="confirmImport()">
+              Confirm Import ({{ selectedAccountIds.length }})
+            </button>
+          </div>
+        </div>
+      </div>
+
     <div class="asset-row" *ngFor="let asset of assets">
       <div class="asset-info">
         <span class="name">{{ asset.name }}</span>
@@ -24,12 +70,39 @@
         </div>
       </div>
       <button class="delete-btn" (click)="onDelete(asset.id)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18">
-          <path d="M3 6h18m-2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"><path d="M3 6h18m-2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
       </button>
     </div>
   </div>
 
-  <button class="add-button">+ Add Asset</button>
+  <button class="add-button" (click)="openModal()">+ Add Asset</button>
+
+  <div class="modal-overlay" *ngIf="showModal">
+    <div class="modal-content">
+      <h4>Add New Asset</h4>
+      <div class="form-group">
+        <label>Name</label>
+        <input [(ngModel)]="newAsset.name" placeholder="e.g. Bitcoin" />
+      </div>
+      <div class="form-group">
+        <label>Amount ($)</label>
+        <input type="number" [(ngModel)]="newAsset.amount" />
+      </div>
+      <div class="form-group">
+        <label>Type</label>
+        <select [(ngModel)]="newAsset.asset_type">
+          <option value="liquid">Liquid (Cash)</option>
+          <option value="illiquid">Illiquid (Real Estate/Stock)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Annual Growth (%)</label>
+        <input type="number" [(ngModel)]="newAsset.growth_rate" />
+      </div>
+      <div class="modal-actions">
+        <button class="btn-cancel" (click)="closeModal()">Cancel</button>
+        <button class="btn-save" (click)="onSubmit()">Save Asset</button>
+      </div>
+    </div>
+  </div>
 </div>

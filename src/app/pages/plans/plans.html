@@ -1,25 +1,35 @@
-<div class="plans-container">
-  <header class="plans-header">
-    <div class="title-section">
-      <span class="label">Current Plan</span>
-      <h1>[sample] My Financial Plan</h1>
+<div class="plans-wrapper">
+  <header class="page-header">
+    <div class="breadcrumb">
+      <span>Current Plan</span>
     </div>
-    <div class="header-actions">
-      <button class="icon-btn"><svg>...</svg></button>
-      <button class="btn-primary">+</button>
+    <div class="title-row">
+      <h1><span id="username">{{username}}</span>'s Financial Plan</h1>
+      <div class="header-actions">
+        <button class="icon-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20">
+            <path d="M12 5v14M5 12h14"></path>
+          </svg>
+        </button>
+      </div>
     </div>
   </header>
 
-  <div class="plans-grid">
-    <app-assets></app-assets>
+  <main class="plans-grid">
+    <div class="grid-column">
+      <app-assets></app-assets>
+    </div>
 
-    <!-- <app-cash-flow></app-cash-flow>
+    <div class="grid-column">
+      <div class="placeholder-card">
+        <p>Cash Flow Section (Coming Soon)</p>
+      </div>
+    </div>
 
-    <app-events></app-events> -->
-  </div>
-
-  <div class="simulation-section">
-    <!-- <app-simulation-summary></app-simulation-summary>
-    <app-financial-timeline></app-financial-timeline> -->
-  </div>
+    <div class="grid-column">
+      <div class="placeholder-card">
+        <p>Events Section (Coming Soon)</p>
+      </div>
+    </div>
+  </main>
 </div>
