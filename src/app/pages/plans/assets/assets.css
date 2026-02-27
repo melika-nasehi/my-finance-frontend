@@ -1,0 +1,48 @@
+.assets-card {
+  background: #15141b;
+  border: 1px solid #27272a;
+  border-radius: 12px;
+  padding: 24px;
+  color: white;
+}
+
+.header-content { display: flex; gap: 12px; margin-bottom: 24px; }
+
+.icon-wrapper {
+  width: 42px; height: 42px;
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.icon-wrapper svg { width: 22px; height: 22px; }
+.text-group h3 { margin: 0; font-size: 1.1rem; font-weight: 600; }
+.text-group p { margin: 4px 0 0; color: #a1a1aa; font-size: 0.85rem; }
+
+.asset-row {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  padding: 16px 0;
+  border-bottom: 1px solid #27272a;
+}
+
+.asset-info { display: flex; flex-direction: column; gap: 2px; }
+.name { font-weight: 500; font-size: 1rem; }
+.type { color: #71717a; font-size: 0.8rem; text-transform: capitalize; }
+.amount-row { display: flex; align-items: baseline; gap: 10px; margin-top: 4px; }
+.price { font-size: 1.15rem; font-weight: 700; }
+.growth { color: #10b981; font-size: 0.8rem; font-weight: 500; }
+
+.delete-btn {
+  background: transparent; border: none; color: #52525b;
+  cursor: pointer; padding: 4px; border-radius: 4px;
+}
+.delete-btn:hover { color: #ef4444; background: rgba(239, 68, 68, 0.05); }
+
+.add-button {
+  width: 100%; background: transparent;
+  border: 1px dashed #3f3f46; color: #a1a1aa;
+  padding: 12px; border-radius: 8px; margin-top: 16px;
+  cursor: pointer; font-size: 0.9rem; transition: 0.2s;
+}
+.add-button:hover { border-color: #71717a; color: white; background: rgba(255, 255, 255, 0.02); }

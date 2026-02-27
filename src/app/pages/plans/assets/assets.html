@@ -1,0 +1,35 @@
+<div class="assets-card">
+  <div class="card-header">
+    <div class="header-content">
+      <div class="icon-wrapper">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 1v22m5-18H6.9a3 3 0 0 0 0 6h10.2a3 3 0 0 1 0 6H6.2"></path>
+        </svg>
+      </div>
+      <div class="text-group">
+        <h3>Assets</h3>
+        <p>What you own right now</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="assets-list">
+    <div class="asset-row" *ngFor="let asset of assets">
+      <div class="asset-info">
+        <span class="name">{{ asset.name }}</span>
+        <span class="type">{{ asset.asset_type }}</span>
+        <div class="amount-row">
+          <span class="price">${{ asset.amount | number }}</span>
+          <span class="growth" *ngIf="asset.growth_rate > 0">{{ asset.growth_rate }}% growth</span>
+        </div>
+      </div>
+      <button class="delete-btn" (click)="onDelete(asset.id)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18">
+          <path d="M3 6h18m-2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <button class="add-button">+ Add Asset</button>
+</div>
